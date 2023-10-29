@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Дерево комплектующих</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+
+        ul ul {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Дерево комплектующих</h1>
+    <ul>
+        {% for node in tree %}
+            <li>
+                {{ node.component.name }}
+                {% if node.children %}
+                    <ul>
+                        {% for child in node.children %}
+                            <li>
+                                {{ child.component.name }}
+                                {% if child.children %}
+                                    <ul>
+                                        {% for grandchild in child.children %}
+                                            <li>
+                                                {{ grandchild.component.name }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
